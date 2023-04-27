@@ -4,12 +4,15 @@ from PIL import Image
 import numpy as np
 import pickle
 
+#///1
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR, "images")
 
+#///2
 face_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_frontalface_alt2.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 
+#///3
 current_id = 0
 label_ids = {}
 y_labels = []
@@ -38,8 +41,11 @@ for root, dirs, files in os.walk(image_dir):
 				
 print(y_labels)
 print(x_train)
+
+#///4	
 with open("pickles/face-labels.pickle", 'wb') as f:
 	pickle.dump(label_ids, f)      
-	
+
+#///5
 recognizer.train(x_train, np.array(y_labels))
 recognizer.save("recognizers/face-trainner.yml")
